@@ -5,6 +5,13 @@ import { useState } from "react";
 
 export default function Products() {
   const [searchText, setSearchText] = useState("");
+  const filteredProducts = products.filter((product) => {
+    const searchLower = searchText.toLowerCase();
+    return (
+      product.name.toLowerCase().includes(searchLower) ||
+      product.description.toLowerCase().includes(searchLower)
+    );
+  });
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold mb-4">Our Cats</h1>
@@ -21,7 +28,7 @@ export default function Products() {
         <p className="text-lg font-medium">Result for: {searchText}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product, index) => (
+        {filteredProducts.map((product, index) => (
           <ProductDetail key={index} product={product} />
         ))}
       </div>
