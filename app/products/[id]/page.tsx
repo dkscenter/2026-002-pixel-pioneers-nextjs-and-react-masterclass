@@ -1,9 +1,11 @@
 import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import ProductFullDetail from "@/components/Product/ProductFullDetail";
+import { products } from "@/data/products";
 
 interface ProductDetailParams {
-  id: string;
+  id: number;
 }
 
 interface ProductDetailProps {
@@ -12,6 +14,7 @@ interface ProductDetailProps {
 
 export default async function Product({ params }: ProductDetailProps) {
   const { id } = await params;
+  const product = products[id || 0];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -20,7 +23,7 @@ export default async function Product({ params }: ProductDetailProps) {
         <ChevronRightIcon className="h-5 w-5 ml-2" />
         Cat detail
       </h1>
-      Product ID: {id}
+      <ProductFullDetail product={product} />
     </div>
   );
 }
